@@ -1,0 +1,168 @@
+.homeCanvas{
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+}
+.homeContainer{
+    background-color: white;
+    padding-top: 4vmax;
+    border-radius: 0 0 200px 200px;
+    border-bottom: 200px solid white;
+    position: relative;
+    z-index: 1;
+}
+.homeContainer > h3{
+    text-align: center;
+    color: rgba(22, 20, 20, 0.904);
+    padding: 4vmax;
+}
+.homeSkills{
+    transform: translateY(-200px);
+    display: flex;
+    margin-bottom: -200px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 450px;
+    box-sizing: border-box;
+    /* padding: 50px; */
+    position: relative;
+    height: 1500px;
+    background-color: hsl(219, 48%, 8%);
+
+}
+.homeSkills > h3 {
+    text-align: center;
+    color: white;
+    margin-bottom: 12vmax;
+    
+    font-size: 5vmax;
+    
+}
+.homeCubeSkills{
+    margin-bottom: 12vmax;
+    width: 130px;
+    height: 130px;
+    animation: cubeRotation 15s linear infinite alternate;
+    transform-style: preserve-3d;
+}
+.homeCubeFaces{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    opacity: 0.7;
+    padding:2vmax;
+}
+.homeCubeFaces > img{
+    width: inherit;
+    height: inherit;
+}
+.homeCubeFace1{
+    transform: translate3d(0,0,90px);
+}
+.homeCubeFace2{
+    transform: rotateY(180deg) translate3d(0,0,90px);
+}
+.homeCubeFace3{
+    transform: rotateY(-90deg) translate3d(0,0,90px);
+}
+.homeCubeFace4{
+    transform: rotateY(90deg) translate3d(0,0,90px);
+}
+.homeCubeFace5{
+    transform: rotateX(90deg) translate3d(0,0,90px);
+}
+.homeCubeFace6{
+    transform: rotateX(-90deg) translate3d(0,0,90px);
+}
+@keyframes cubeRotation {
+    to{
+        transform: rotateY(360deg) rotateX(480deg) rotateZ(720deg);
+    }
+}
+.cubeShadow {
+   
+    width: 250px;
+    margin-bottom: 10vmax;
+    height: 90px;
+    background-color: rgba(67, 72, 75, 0.5); 
+    border-radius: 50%;
+    animation: cubeShadow 1s ease-in-out infinite alternate;
+    filter: blur(3px);
+   
+}
+@keyframes cubeRotation {
+    to{
+        transform: rotateY(360deg) rotateX(480deg) rotateZ(720deg);
+    }    
+}
+@keyframes cubeShadow {
+    to{
+        transform: translateY(-10px) scale(1.2);
+    }    
+}
+.homeSkillsBox{
+    background-color: hsl(157, 71%, 73%);
+    padding: 0 2vmax;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: -300px;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+.homeSkillsBox > svg{
+    font-size: 5vmax;
+    color: rgb(255, 255, 255);
+    transition: all 0.5s;
+    margin: 10px;
+}
+.homeSkillsBox > svg:hover{
+    transform: scale(1.5);
+}
+@keyframes skillCubeBoxAnimationOn {  
+      from{
+    right: -300px;
+      }
+      to{
+        right: 40px; 
+    } 
+}
+@keyframes skillCubeBoxAnimationOff {  
+    from{
+  right: 40px;
+    }
+    to{
+      right: 300px; 
+  } 
+}
+.homeYoutube {
+    background-color: rgb(255, 255, 255);
+    border-radius: 550px 550px 0 0; 
+    padding-top: 4vmax;
+    position: relative;
+    transform: translateY(-110px);
+    margin-bottom: -110px;
+    box-sizing: border-box;
+    min-height: 100px;
+}
+
+.homeYoutube > h3 {
+    text-align: center;
+    color: black;
+    /* padding: 0vmax; */
+}
+.homeYoutubeRaper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2vmax;
+    width: 80%;
+    border-radius: 2px solid rgb(159, 221, 236);
+    margin: auto;
+}

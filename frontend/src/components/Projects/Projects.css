@@ -1,0 +1,119 @@
+.projects{
+    background-color: hsl(219,48%,8%);
+    min-height: 100vh;
+    padding-top: 15vmax;
+}
+.projects > h3{
+    text-align: center;
+    color: white;
+    position: absolute;
+    background-color: rgb(112, 80, 145);
+    padding: 2vmax 4vmax;
+    display: flex;
+    border-radius: 100px;
+    align-items: center;
+    left: 50%;
+    transform: translate(-50%, -100vh);
+    animation: projectHeadingAnimation 1s ease-in-out forwards;
+}
+.projects>h3 >svg{
+    margin: 1vmax;
+}
+.projectRapper{
+    border-top: 100px solid white;
+    border-radius: 300px 300px 0 0;
+    min-height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    flex-wrap: wrap;
+    padding: 5vmax;
+    padding-bottom: 10vmax;
+    overflow-x: hidden;
+
+}
+.image{
+    width: inherit;
+    
+}
+.projectCard{
+    text-decoration: none;
+    width: 80%;
+    color: rgba(0,0,0,0.712);
+    margin: 2vmax;
+    border-radius: 10px;
+    display: flex;
+    transform: translateX(-100vw);
+    animation: projectsAnimation 2s ease-in-out forwards 0.5s;
+}
+.projectCard:nth-child(even){
+    transform: translateX(100vw);
+    flex-direction: row-reverse;
+    animation: projectsAnimation 2s ease-in-out forwards 1s;
+}
+@keyframes projectsAnimation {
+    to{
+        transform: translateX(0);
+    }
+    
+}
+@keyframes projectHeadingAnimation {
+    to{
+        transform: translate(-50%, -50%);
+    }
+    
+}
+.projectCard>div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    transition: all 0.5s;
+    justify-content: space-around;
+}
+.projectCard>div:first-child::after{
+    content: "VIEW DEMO";
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font: 100 2rem "Roboto";
+    align-items: center;
+    justify-content:center ;
+    background-color: hsl(250, 100%, 75%);
+    }
+.projectCard >div:first-child >h5{
+    text-align: center;
+    padding: 2vmax;
+}
+.projectCard >div:last-child >h4{
+    text-align: center;
+}
+.projectCard >div:last-child >p{
+    letter-spacing: 5px;
+    word-spacing: 5px;
+    text-align: right;
+}
+.projectCard >div:last-child >h6{
+    font-family: "Ubuntu Mono";
+    font-weight: bold;
+    color: black;
+}
+.projectCard:hover div:first-child{
+    filter: blur(2px);
+}
+@media screen and (max-width:600px) {
+    .projectCard{
+          flex-direction: column;
+    }
+    .projectCard:nth-child(even){
+    flex-direction: column;
+    }
+    .projectCard >div{
+          justify-content: center;
+    }
+    .projectCard>div:last-child>p{
+        text-align: center;
+    }
+}

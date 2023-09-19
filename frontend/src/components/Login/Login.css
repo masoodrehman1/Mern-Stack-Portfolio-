@@ -1,0 +1,87 @@
+.login{
+    background-color: hsl(219, 48%, 8%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.loginContainer{
+    width: 50%;
+    border-radius: 5px ;
+    box-shadow: 0 0 10px rgba(0,0,0,0.336);
+    background-color: white;
+}
+.loginForm{
+    background-color: inherit;
+    background-color: 5px;
+    height: 70vh;
+    padding: 2vmax;
+}
+.loginForm>h4{
+    margin: 2vmax;
+    letter-spacing: 15px;
+    transform: translateX(-100vw);
+    display: flex;
+    animation: contactFormInput 1s ease-in-out forwards 0.3s;
+    justify-content: center;
+}
+.loginForm>h4>p{
+    transition: all 0.5s;
+    cursor: default;
+}
+.loginForm>h4>p:hover{
+    transform: translateY(-10px);
+
+}
+.loginForm>div{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 2vmax 8vmax;
+    box-sizing: border-box;
+
+}
+.loginForm>div>input{
+    padding: 1vmax 2vmax;
+    margin: 1vmax;
+    border: 1px solid rgba(0,0,0,0.192);
+    transform: translateX(-100vw);
+    font: 100 1rem "Roboto";
+    border-radius: 30px;
+    animation: contactFormInput 1s ease-in-out forwards 0.5s;
+    outline: none;
+}
+.loginForm >div>button{
+    animation: contactFormBtn 1s ease-in-out forwards 1s;
+    padding: 1vmax 2vmax;
+    margin: 1vmax;
+    transform: translateY(-100vh);
+    border-radius: 30px;
+    background-color: hsl(250, 100%, 75%);
+    color: white;
+    transition: all 0.5s;
+}
+.loginForm >div>button:hover{
+    background-color: hsl(219, 48%, 8%);
+}
+@media screen and (max-width:600px) {
+    .loginContainer{
+        width: 100%;
+        border-radius: 0;
+    }
+    .loginForm{
+        border-radius: 0;
+    }
+    .loginForm>div{
+        padding: 4vw 8vw;
+    }
+    .loginForm>div>input{
+        padding: 3vw 6vw;
+        margin: 2vw;
+    }
+    .loginForm>div>Button{
+        padding: 3vw 6vw;
+        margin: 2vw;
+    }
+}
