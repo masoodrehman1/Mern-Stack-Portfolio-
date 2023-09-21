@@ -10,7 +10,9 @@ export const isauthenticated=async(req, res, next)=>{
                 massage:"Please Login To Visit My portfolio Details"
             })
         }
-        const decode = jwt.verify(token, process.env.JWT_SECRET)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const user=await User.findById(decoded._id)
+        req.user=user
     } catch (error) {
         return res.status(400).json({
             success:false,
