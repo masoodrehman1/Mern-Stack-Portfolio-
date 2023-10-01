@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import "./Login.css"
 import  {Button,Typography} from "@mui/material"
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../actions/user'
+import {useAlert} from "react-alert"
+
 
 
 const Login = () => {
@@ -13,7 +17,24 @@ const Login = () => {
     }
     const submitHandler=(e)=>{
         e.preventDefault()
+        dispatch(login(adminLogin.email, adminLogin.password))
     }
+    const dispatch = useDispatch()
+    const alert = useAlert()
+    const {loading, message, error}=useSelector(state=>state.login)
+    useEffect(() => {
+      if(error){
+        alert.error(error)
+        dispatch({type:"CLEAR_ERRORS"})
+      }
+      if(message){
+        alert.success(message)
+        dispatch({type:"CLEAR_MESSAGE"})
+      }
+    
+    }, [alert, message, error, dispatch])
+    
+    
   return (
     <div className='login'>
         <div className="loginContainer">
@@ -32,9 +53,9 @@ const Login = () => {
                     <p>L</p>
                 </Typography>
                 <div>
-                    <input required type="email" placeholder='Admin Email' name='email' onChange={((e)=>(adminHandler))}/>
-                    <input required type="password" placeholder='Admin Password' name='Password' onChange={((e)=>(adminHandler))}/>
-                    <Button type='submit' variant='contained'>Login</Button>
+                    <input required type="email" placeholder='Admin Email' name='email' onChange={((e)=>(adminHandler(e)))}/>
+                    <input required type="password" placeholder='Admin Password' name='password' onChange={((e)=>(adminHandler(e)))}/>
+                    <Button type='submit' variant='contained' disabled={loading}>Login</Button>
                 </div>
             </form>
         </div>

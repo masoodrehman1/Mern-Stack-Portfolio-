@@ -7,13 +7,18 @@ import About from './components/about/About';
 import Contact from './components/Contact/Contact';
 import Projects from './components/Projects/Projects';
 import Login from './components/Login/Login';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUser } from './actions/user';
+import { getUser, loadUser } from './actions/user';
+import AdminPanel from './components/Admin/AdminPanel';
 function App() {
   const dispatch= useDispatch()
+  const {isauthenticated}=useSelector((state)=>state.login)
+
+
   useEffect(() => {
    dispatch(getUser())
+   dispatch(loadUser())
   }, [dispatch])
   
   return (
@@ -24,7 +29,7 @@ function App() {
       <Route path='/About' element={<About/>}/>
       <Route path='/projects' element={<Projects/>}/>
       <Route path='/contact' element={<Contact/>}/>
-      <Route path='/account' element={<Login/>}/>
+      <Route path='/account' element={isauthenticated ? <AdminPanel/>:<Login/>}/>
     </Routes>
     <Footer/>
    </Router>
