@@ -3,6 +3,10 @@ import {User} from "../model/User.js"
 import jwt  from "jsonwebtoken"
 import cloudinary from "cloudinary"
 
+const generateToken=(_id)=>{
+    return jwt.sign({_id}, process.env.JWT_SECRET)
+}
+
 export const login= async (req,res)=>{
   try {
     const {email, password}=req.body
@@ -15,7 +19,7 @@ export const login= async (req,res)=>{
             message:"Invalid Email or Password"     
         })
     }
-    const token = jwt.sign({_id:user._id},process.env.JWT_SECRET)
+    const token = generateToken(user._id)
     res.cookie("token",token,{
         expire:new Date(Date.now()+ 600000),
         httpOnly:true,
@@ -39,8 +43,8 @@ export const login= async (req,res)=>{
 export const logout= async (req,res)=>{
     try {
     
-      res.status(200),cookie("token",null,{
-          expire:new Date(Date.now()),
+    await  res.status(200).cookie("token",null,{
+          expires:new Date(Date.now()),
           httpOnly:true
       }).json({
           success:true,
@@ -127,60 +131,24 @@ export const logout= async (req,res)=>{
             user.password=password
         }
         if(skills){
-           if(skills.image1){
-            await cloudinary.v2.uploader.destroy(user.skills.image1.public_id)
-            const myCloud=await cloudinary.v2.uploader.upload(skills.image1,{folder:"portfolio"})
-            user.skills.image1={
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-           }
-           if(skills.image2){
-            await cloudinary.v2.uploader.destroy(user.skills.image2.public_id)
-            const myCloud=await cloudinary.v2.uploader.upload(skills.image2,{folder:"portfolio"})
-            user.skills.image2={
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-           }
-           if(skills.image3){
-            await cloudinary.v2.uploader.destroy(user.skills.image3.public_id)
-            const myCloud=await cloudinary.v2.uploader.upload(skills.image3,{folder:"portfolio"})
-            user.skills.image3={
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-           }
-           if(skills.image4){
-            await cloudinary.v2.uploader.destroy(user.skills.image4.public_id)
-            const myCloud=await cloudinary.v2.uploader.upload(skills.image4,{folder:"portfolio"})
-            user.skills.image4={
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-           }
-           if(skills.image5){
-            await cloudinary.v2.uploader.destroy(user.skills.image5.public_id)
-            const myCloud=await cloudinary.v2.uploader.upload(skills.image5,{folder:"portfolio"})
-            user.skills.image5={
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-           }
-           if(skills.image6){
-            await cloudinary.v2.uploader.destroy(user.skills.image6.public_id)
-            const myCloud=await cloudinary.v2.uploader.upload(skills.image6,{folder:"portfolio"})
-            user.skills.image6={
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-           }
+            for (let i=1; i<=6;i++){
+                const key=`image${i}`
+                if(skills[key]){
+                    await cloudinary.v2.uploader.destroy(user.skills[key].public_id)
+                    const myCloud=await cloudinary.v2.uploader.upload(skills[key],{folder:"portfolio"})
+                    user.skills[key]={
+                        public_id:myCloud.public_id,
+                        url:myCloud.secure_url
+                    } } }
         }
+        
         if(about){
-            user.about.name=about.name
-            user.about.title=about.title
-            user.about.description=about.description
-            user.about.quote=about.quote
+            if(about.name){
+            user.about.name=about.name}
+            if(about.title){user.about.title=about.title}
+            if(about.description){user.about.description=about.description}
+            if(about.avatar){user.about.quote=about.quote}
+            
             if(about.avatar){
                 await cloudinary.uploader.destroy(user.about.avatar.public_id)
                 const myCloud = await cloudinary.uploader.upload(about.avatar,{
@@ -208,8 +176,9 @@ export const logout= async (req,res)=>{
   export const addTimeline= async (req, res)=>{
     try {
         const {title, description,date}=req.body
+        console.log(req.body)
         const user=await User.findById(req.user._id)
-        user.timeline.unShift({
+        user.timeline.unshift({
             title, description,date
         })
         await user.save()
@@ -252,21 +221,25 @@ const myCloud= await cloudinary.v2.uploader.upload(image,{folder:"portfolio"})
   }
   export const addProject= async (req, res)=>{
     try {
-        const {url,title, image,description,techStack}=req.body
+        const { url, title, image, description, techStack}=req.body
+        console.log(req.body)
         const user=await User.findById(req.user._id)
+      
 const myCloud= await cloudinary.v2.uploader.upload(image,{folder:"portfolio"})
-
-        user.projects.unShift({
+ 
+ 
+        user.projects.unshift({
             url,
             title,
+            image: {
+              public_id: myCloud.public_id,
+              url: myCloud.secure_url
+            },
             description,
             techStack,
-            image:{
-                public_id:myCloud.public_id,
-                url:myCloud.secure_url
-            }
-        })
+          })
         await user.save()
+
         res.status(200).json({
             success:true,
             message:"Added To Projects",
@@ -283,7 +256,7 @@ const myCloud= await cloudinary.v2.uploader.upload(image,{folder:"portfolio"})
 
         const {id}=req.params
         const user=await User.findById(req.user._id)
-        user.timeline= user.timeline.filter((item)=> item._id!==id)
+        user.timeline= user.timeline.filter((item)=> item._id!=id)
 
 
         await user.save()
@@ -326,10 +299,10 @@ const myCloud= await cloudinary.v2.uploader.upload(image,{folder:"portfolio"})
         const {id}=req.params
         const user=await User.findById(req.user._id)
 
-        const project= user.projects.filter((item)=> item._id===id)
+        const project= user.projects.find((item)=> item._id==id)
         await cloudinary.v2.uploader.destroy(project.image.public_id)
         
-        user.projects= user.projects.filter((item)=> item._id!==id)
+        user.projects= user.projects.filter((item)=> item._id!=id)
         await user.save()
         res.status(200).json({
             success:true,

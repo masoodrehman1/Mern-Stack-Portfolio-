@@ -17,7 +17,7 @@ export const isauthenticated=async(req, res, next)=>{
     } catch (error) {
         return res.status(400).json({
             success:false,
-            messgae: error.message
+            message: error.message
         })
         
     }

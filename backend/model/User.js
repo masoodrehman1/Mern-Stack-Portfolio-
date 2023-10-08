@@ -67,7 +67,7 @@ projects:[
     title:String,
     image:{
         public_id:String,
-        url:String
+        url:String,
     },
     description:String,
     techStack:String

@@ -7,10 +7,13 @@ import About from './components/about/About';
 import Contact from './components/Contact/Contact';
 import Projects from './components/Projects/Projects';
 import Login from './components/Login/Login';
+import Timeline from './components/Admin/TimeLine';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getUser, loadUser } from './actions/user';
 import AdminPanel from './components/Admin/AdminPanel';
+import Project from './components/Admin/Project';
 function App() {
   const dispatch= useDispatch()
   const {isauthenticated}=useSelector((state)=>state.login)
@@ -30,6 +33,9 @@ function App() {
       <Route path='/projects' element={<Projects/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/account' element={isauthenticated ? <AdminPanel/>:<Login/>}/>
+      <Route path='/admin/timeline' element={isauthenticated ? <Timeline/>:<Login/>}/>
+      <Route path='/admin/project' element={isauthenticated ? <Project/>:<Login/>}/>
+
     </Routes>
     <Footer/>
    </Router>
