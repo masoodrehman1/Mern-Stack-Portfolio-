@@ -6,20 +6,18 @@ import vinusImage from "../../Images/venus.jpg"
 import spaceImage from "../../Images/space2.jpg"
 import {Typography} from "@mui/material"
 import Timeline from "../../components/timeLine/TimeLine"
-import imageFace1 from "../../Images/face1.jpg";
-import imageFace2 from "../../Images/face2.jpg";
-import imageFace3 from "../../Images/face3.jpg";
-import imageFace4 from "../../Images/face4.jpg";
-import imageFace5 from "../../Images/face5.jpg";
-import imageFace6 from "../../Images/face6.jpg"
 import {SiCplusplus,SiReact,SiJavascript,SiMongodb,SiMongoose,SiNodedotjs,SiExpress,SiCss3,SiHtml5,SiThreedotjs} from "react-icons/si"
+import { Link } from 'react-router-dom'
+import { MouseOutlined } from '@mui/icons-material'
 
-const Home = () => {
 
+const Home = ({timeline, skills}) => {
   useEffect(() => {
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 1000)
-    camera.position.set(2,2,12)
+const sceneCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+sceneCamera.position.set(2, 2, 12);
+const backgroundCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+backgroundCamera.position.set(2, 2, 12);
    
     const canvas= document.querySelector(".homeCanvas")
     const renderer = new THREE.WebGLRenderer({canvas})
@@ -89,9 +87,23 @@ const Home = () => {
       moon.rotation.x -= 0.001
       vinus.rotation.x -= 0.001
       renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.render(scene, camera)
+      renderer.render(scene, sceneCamera)
+      renderer.render(scene, backgroundCamera)
+
     }
    animate()
+
+   return window.addEventListener("scroll",()=>{
+    backgroundCamera.rotation.z = window.scrollY * 0.003;
+    backgroundCamera.rotation.y = window.scrollY * 0.003;
+
+    const skillsBox=document.getElementById("homeSkillsBox")
+    if (window.scrollY > 1000) {
+      skillsBox.style.animation = "skillCubeBoxAnimationOn 1s linear forwards";
+    } else {
+      skillsBox.style.animation = "skillCubeBoxAnimationOff 1s linear forwards";
+    }
+   })
     
     }
   , [])
@@ -100,35 +112,45 @@ const Home = () => {
   return (
     <div className='home'>
 
-     <canvas className='homeCanvas'></canvas>     
+     <canvas className='homeCanvas'></canvas>    
+     <div className="homeCanvasContainer">
+      <Typography variant='h1'>
+      <p>M</p>
+      <p>a</p>
+      <p>s</p>
+      <p>o</p>
+      <p>o</p>
+      <p>d</p>
+
+      </Typography>
+     
+      <div className="homeCanvasBox">
+        <Typography variant='h2'>Designer</Typography>
+        <Typography variant='h2'>Developer</Typography>
+        <Typography variant='h2'>Creater</Typography>
+      </div>
+      <Link to="/projects">VIEW MY WORK</Link>
+      </div> 
+      <div className="homeScrollBtn">
+       <MouseOutlined/>
+
+      </div>
      <div className="homeContainer">
       <Typography variant='h3'>TIMELINE</Typography>
-      <Timeline timelines={[1,2,3,4]}/>
+      <Timeline timelines={timeline}/>
      </div>
      <div className="homeSkills">
       <Typography variant='h3'>SKILLS</Typography>
-      <div className="homeCubeSkills">
-        <div className="homeCubeFaces homeCubeFace1" >
-          <img src={imageFace1} alt="imageFace1" />
-        </div>
-        <div className="homeCubeFaces homeCubeFace2" >
-          <img src={imageFace2} alt="imageFace2" />
-        </div>
-        <div className="homeCubeFaces homeCubeFace3" >
-          <img src={imageFace3} alt="imageFace3" />
-        </div>
-        <div className="homeCubeFaces homeCubeFace4" >
-          <img src={imageFace4} alt="imageFace4" />
-        </div>
-        <div className="homeCubeFaces homeCubeFace5" >
-          <img src={imageFace5} alt="imageFace5" />
-        </div>
-        <div className="homeCubeFaces homeCubeFace6" >
-          <img src={imageFace6} alt="imageFace6" />
-        </div>
+      <div className="homeCubeSkills">{[1,2,3,4,5,6].map((val)=>(
+        <div key={val} className="homeCubeFaces homeCubeFace{val}" >
+        <img src={skills[`image${val}`]?.url} alt={`imageFace${val}`} />
+      </div>
+      ))
+        
+   }
       </div>
       <div className="cubeShadow"></div>
-      <div className="homeSkillsBox">
+      <div className="homeSkillsBox" id='homeSkillsBox'>
         <SiCplusplus/><SiCss3/><SiJavascript/><SiHtml5/><SiReact/><SiNodedotjs/><SiExpress/><SiMongoose/><SiMongodb/>
         <SiThreedotjs/>
       </div>

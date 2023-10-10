@@ -9,6 +9,7 @@ import { Button, Typography } from '@mui/material'
 import { ProjectCard } from '../Projects/Projects'
 
 const Project = () => {
+  const { message:loginMessage}=useSelector((state)=>state.login)
     const {message,error,loading}= useSelector((state)=>state.update)
     const {user}= useSelector((state)=>state.user)
     // console.log(user)
@@ -33,10 +34,14 @@ const Project = () => {
             alert.success(message)
             dispatch({type:"CLEAR_MESSAGE"})
           }
-       
+          if(loginMessage){
+            alert.success(loginMessage)
+            dispatch({type:"CLEAR_MESSAGE"})
+          }
       
-      }, [alert, message, error,dispatch])
+      }, [alert, message, error,dispatch,loginMessage])
       
+ 
 const projectHandle=(e)=>{
   const {name,value}=e.target
   if(name==="image"){
@@ -86,7 +91,7 @@ const projectHandle=(e)=>{
                        <ProjectCard
                        id={item._id} 
                        key={item._id}
-                       url
+                       url={item.url}
                        projectImage={item.image.url}
                        projectTitle={item.title}
                        description={item.description}

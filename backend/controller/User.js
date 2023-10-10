@@ -95,9 +95,9 @@ export const logout= async (req,res)=>{
   }
   export const contact= async (req, res)=>{
     try {
-        const {name, email, massage}=req.body
-        const userMassage=` my name is ${name}. My email is ${email}. I want to say that ${massage}.`
-        await sendMail(userMassage)
+        const {name, email, message}=req.body
+        const userMessage=` my name is ${name}. My email is ${email}. I want to say that ${message}.`
+        await sendMail(userMessage)
         return res.status(200).json({
             success:true,
             message:"message sent successfuly"
@@ -147,7 +147,7 @@ export const logout= async (req,res)=>{
             user.about.name=about.name}
             if(about.title){user.about.title=about.title}
             if(about.description){user.about.description=about.description}
-            if(about.avatar){user.about.quote=about.quote}
+            if(about.quote){user.about.quote=about.quote}
             
             if(about.avatar){
                 await cloudinary.uploader.destroy(user.about.avatar.public_id)

@@ -17,7 +17,7 @@ import Project from './components/Admin/Project';
 function App() {
   const dispatch= useDispatch()
   const {isauthenticated}=useSelector((state)=>state.login)
-
+  const {loading, user}=useSelector(((state)=>state.user))
 
   useEffect(() => {
    dispatch(getUser())
@@ -26,11 +26,14 @@ function App() {
   
   return (
    <Router>
-    <Header/>
+    {loading?(
+      <div>loading</div>
+    ):(<>
+     <Header/>
     <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/About' element={<About/>}/>
-      <Route path='/projects' element={<Projects/>}/>
+      <Route path='/' element={<Home timeline={user.timeline} skills={user.skills}/>}/>
+      <Route path='/About' element={<About about={user.about}/>}/>
+      <Route path='/projects' element={<Projects projects={user.projects}/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/account' element={isauthenticated ? <AdminPanel/>:<Login/>}/>
       <Route path='/admin/timeline' element={isauthenticated ? <Timeline/>:<Login/>}/>
@@ -38,6 +41,8 @@ function App() {
 
     </Routes>
     <Footer/>
+    </>)}
+   
    </Router>
   );
 }

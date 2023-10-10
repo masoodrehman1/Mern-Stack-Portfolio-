@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect,  } from 'react'
 import "./AdminPanel.css"
 import { Button, Typography } from '@mui/material'
 import {AiOutlineProject} from "react-icons/ai"
@@ -8,18 +8,16 @@ import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import {logout, updateUser} from "../../actions/user"
 import { useAlert } from 'react-alert'
+import {updateAdminData  } from "../../Reducers/stateData"
 
 
 const AdminPanel = () => {
     const dispatch=useDispatch()
-    
     const alert=useAlert()
     const { message:loginMessage}=useSelector((state)=>state.login)
     const {message,error,loading}= useSelector((state)=>state.update)
-   
- const [adminData, setAdminData] = useState({name:"",email:"",password:"",skills:{},about:{
-    name:"",title:"",description:"",quote:"",avatar:"",
- }})
+    const adminData = useSelector((state) => state.adminData);
+
  const submitHandler=(e)=>{
     e.preventDefault()
     dispatch(updateUser(adminData.name,adminData.email, adminData.password,adminData.skills,adminData.about))
@@ -32,7 +30,7 @@ const AdminPanel = () => {
     reader.readAsDataURL(e.target.files[0])
     reader.onload=()=>{
     if(reader.readyState===2){
-        setAdminData({...adminData, about:{...adminData.about, avatar:reader.result}})
+        dispatch(updateAdminData({ about: { ...adminData.about, avatar: reader.result }}))
     }
     }
  }
@@ -42,16 +40,16 @@ const AdminPanel = () => {
     reader.onload=()=>{
     if(reader.readyState===2){
 
-        setAdminData({...adminData, skills : {...adminData.skills, [`image${val}`]:reader.result}})}
+        dispatch(updateAdminData({skills : {...adminData.skills, [`image${val}`]:reader.result}}))}
         
        
     }
  }
 const adminHandler=(e)=>{
-    setAdminData({...adminData,[e.target.name]:e.target.value})
+    dispatch(updateAdminData({[e.target.name]:e.target.value}))
 }
 const handleAbout=(e)=>{
-    setAdminData({...adminData, about:{...adminData.about, [e.target.name]:e.target.value}})
+    dispatch(updateAdminData({...adminData, about:{...adminData.about, [e.target.name]:e.target.value}}))
 }
 useEffect(() => {
     if(error){
@@ -95,7 +93,7 @@ useEffect(() => {
                         value={adminData[key]}
                         name={key}
                         onChange={(e)=>adminHandler(e)}
-                        required={true}
+                        
                         />
                     ))}
                 <div className='adminPanelSkill'>

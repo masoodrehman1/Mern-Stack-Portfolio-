@@ -86,10 +86,3 @@ about:{
 })
 export const User = mongoose.model("user", userSchema)
 
-// {"about":
-//     { "name":"masood rehman",
-//     "title":"Mernstack developer ",
-//     "description":"i am mernstack developer",
-//     "quote":"keep try agaim"
-//     }
-// }

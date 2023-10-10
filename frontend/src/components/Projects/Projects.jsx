@@ -2,7 +2,6 @@ import "./Projects.css"
 import { Button, Typography } from '@mui/material'
 import {AiOutlineProject} from "react-icons/ai"
 import {Delete} from "@mui/icons-material"
-import myNewImage from "../../Images/face5.jpg"
 import {FaRegSmileWink} from "react-icons/fa"
 import { deleteProject, getUser } from '../../actions/user'
 import { useDispatch } from 'react-redux'
@@ -36,20 +35,22 @@ export const ProjectCard=({
   )
 }
 
-const Projects = () => {
-const project= [1,2,3]
+const Projects = ({projects}) => {
+
 
   return (
     <div className='projects'>
        <Typography variant='h3'>Projects <AiOutlineProject/></Typography>
        <div className="projectRapper">
-        {project.map((project, index)=>(
+        {projects.map((item, index)=>(
           <ProjectCard 
-          url= ""
-          projectImage={myNewImage}
-          projectTitle="Sample Project"
-          description="this is sample project"
-          technologies="React.js"
+          id={item._id}
+          key={item._id}
+          url= {item.url}
+          projectImage= {item.image.url}
+          projectTitle= {item.project}
+          description= {item.description}
+          technologies= {item.techStack}
           />
         ))}
        </div>
