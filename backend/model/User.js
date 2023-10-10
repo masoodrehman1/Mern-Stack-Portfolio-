@@ -51,6 +51,16 @@ skills:{
         },
     
 },
+youtube:[
+    {
+        url:String,
+        title:String,
+        image:{
+            public_id:String,
+            url:String
+        }
+    }
+],
 projects:[
     {
     url:String,
@@ -74,4 +84,12 @@ about:{
     }
 }
 })
-export const User = mongoose.model("User", userSchema)
+export const User = mongoose.model("user", userSchema)
+
+// {"about":
+//     { "name":"masood rehman",
+//     "title":"Mernstack developer ",
+//     "description":"i am mernstack developer",
+//     "quote":"keep try agaim"
+//     }
+// }
