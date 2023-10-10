@@ -6,6 +6,7 @@ import cloudinary from "cloudinary"
 export const login= async (req,res)=>{
   try {
     const {email, password}=req.body
+    console.log(req.body)
     const user= await User.findOne({email,password})
     console.log(user);
     if(!user){
@@ -56,7 +57,7 @@ export const logout= async (req,res)=>{
 
   export const getUser= async (req, res)=>{
     try {
-        const user= User.findOne().select("-email -password")
+        const user=await User.findOne().select("-email -password")
         res.status(200).json({
             success:true,
             user,
@@ -70,7 +71,13 @@ export const logout= async (req,res)=>{
   }
   export const myProfile= async (req, res)=>{
     try {
-        const user= User.findById(req.user._id)
+        const user=await User.findById(req.user._id)
+        if(!user){
+            res.status(400).json({
+                success:false,
+                message:"User not found"
+            })
+        }
         res.status(200).json({
             success:true,
             user,
