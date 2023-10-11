@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { getUser, loadUser } from './actions/user';
 import AdminPanel from './components/Admin/AdminPanel';
 import Project from './components/Admin/Project';
+import Loader from './components/Loader/Loader';
 function App() {
   const dispatch= useDispatch()
   const {isauthenticated}=useSelector((state)=>state.login)
@@ -27,7 +28,7 @@ function App() {
   return (
    <Router>
     {loading?(
-      <div>loading</div>
+      <Loader/>
     ):(<>
      <Header/>
     <Routes>
