@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     max-width: 100%;
-    filter: blur(10px);
+    filter: blur(2px);
     position: absolute;
 }
 .homeCanvasContainer{
