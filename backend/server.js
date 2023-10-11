@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import cloudinary from "cloudinary"
 import {connectDatabase} from "./config/database.js"
 
-dotenv.config({ path: "./backend/config/config.env" });
+dotenv.config({ path: "./config/config.env" });
 connectDatabase()
 cloudinary.v2.config({
     cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
