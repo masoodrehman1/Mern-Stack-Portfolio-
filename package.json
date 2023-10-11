@@ -1,12 +1,12 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "This Is Mern Stack Portfolio Created By Masood Ur Rehman",
-  "main": "backend/server.js",
+  "description": "This Is MERN Stack Portfolio Created By Masood Ur Rehman",
+  "main": "server.js", 
   "type": "module",
   "scripts": {
-    "start":"node backend/server.js",
-    "heroku-postbuild":"MPN_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build prefix frontend"
+    "start": "node server.js", 
+    "build": "your-build-script-here" 
   },
   "author": "Masood Ur Rehman",
   "license": "ISC",
