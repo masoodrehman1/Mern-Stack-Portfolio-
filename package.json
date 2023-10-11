@@ -2,10 +2,10 @@
   "name": "portfolio",
   "version": "1.0.0",
   "description": "This Is MERN Stack Portfolio Created By Masood Ur Rehman",
-  "main": "server.js", 
+  "main": "backend/server.js", 
   "type": "module",
   "scripts": {
-    "start": "node server.js", 
+    "start": "node backend/server.js", 
     "build": "your-build-script-here" 
   },
   "author": "Masood Ur Rehman",
