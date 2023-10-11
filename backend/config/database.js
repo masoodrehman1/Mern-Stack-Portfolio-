@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
-const connectionString = 'mongodb://maasoodrehman:mynameiskhan123@ac-jrmoj2l-shard-00-00.jtr0lnh.mongodb.net:27017,ac-jrmoj2l-shard-00-01.jtr0lnh.mongodb.net:27017,ac-jrmoj2l-shard-00-02.jtr0lnh.mongodb.net:27017/?ssl=true&replicaSet=atlas-cm57xw-shard-0&authSource=admin&retryWrites=true&w=majority';
+dotenv.config();
+
 
 const connectDatabase =async()=>{
-    try{ await mongoose.connect(connectionString, {
+    try{ await mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
