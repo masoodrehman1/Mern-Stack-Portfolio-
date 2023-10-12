@@ -8,6 +8,9 @@ import Contact from './components/Contact/Contact';
 import Projects from './components/Projects/Projects';
 import Login from './components/Login/Login';
 import Timeline from './components/Admin/TimeLine';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -25,11 +28,14 @@ function App() {
    dispatch(loadUser())
   }, [dispatch])
   
-  return (
+  return (<>
+    <ToastContainer autoClose={6000} />
    <Router>
+    
     {loading?(
       <Loader/>
     ):(<>
+      
      <Header/>
     <Routes>
       <Route path='/' element={<Home timeline={user.timeline} skills={user.skills}/>}/>
@@ -44,7 +50,7 @@ function App() {
     <Footer/>
     </>)}
    
-   </Router>
+   </Router></>
   );
 }
 
