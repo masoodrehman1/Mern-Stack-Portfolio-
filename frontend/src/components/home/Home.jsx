@@ -142,7 +142,7 @@ backgroundCamera.position.set(2, 2, 12);
      <div className="homeSkills">
       <Typography variant='h3'>SKILLS</Typography>
       <div className="homeCubeSkills">{[1,2,3,4,5,6].map((val)=>(
-        <div key={val} className="homeCubeFaces homeCubeFace{val}" >
+        <div key={val} className={`homeCubeFaces homeCubeFace${val}`} >
         <img src={skills[`image${val}`]?.url} alt={`imageFace${val}`} />
       </div>
       ))

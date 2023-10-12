@@ -3,7 +3,7 @@ import "./Login.css"
 import  {Button,Typography} from "@mui/material"
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/user'
-import {useAlert} from "react-alert"
+import {toast } from "react-toastify"
 
 
 
@@ -20,7 +20,6 @@ const Login = () => {
         dispatch(login(adminLogin.email, adminLogin.password))
     }
     const dispatch = useDispatch()
-    const alert = useAlert()
     const {loading, message, error}=useSelector(state=>state.login)
     useEffect(() => {
       if(error){
@@ -28,11 +27,11 @@ const Login = () => {
         dispatch({type:"CLEAR_ERRORS"})
       }
       if(message){
-        alert.success(message)
+        toast.success(message)
         dispatch({type:"CLEAR_MESSAGE"})
       }
     
-    }, [alert, message, error, dispatch])
+    }, [ message, error, dispatch])
     
     
   return (

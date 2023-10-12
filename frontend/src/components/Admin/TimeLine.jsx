@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useAlert } from 'react-alert'
+import { success, error } from 'react-toastify-redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTimeline, deleteTimeline, getUser,  } from '../../actions/user'
 import { MdKeyboardBackspace } from 'react-icons/md'
@@ -8,10 +8,9 @@ import { Button, Typography } from '@mui/material'
 import { FaTrash } from 'react-icons/fa'
 
 const Timeline = () => {
-    const {message,error,loading}= useSelector((state)=>state.update)
+    const {message,error:timeError,loading}= useSelector((state)=>state.update)
     const {user}= useSelector((state)=>state.user)
     const dispatch=useDispatch()
-    const alert=useAlert()
     const [timeline,setTimeline]= useState({title:"",description:"", date:""})
     console.log(timeline)
     const submitHandler=async(e)=>{
@@ -25,16 +24,16 @@ const Timeline = () => {
     }
     useEffect(() => {
         if(error){
-          alert.error(error)
+            dispatch(error(timeError))
           dispatch({type:"CLEAR_ERRORS"})
         }
         if(message){
-            alert.success(message)
+            dispatch(success(message))
             dispatch({type:"CLEAR_MESSAGE"})
           }
        
       
-      }, [alert, message, error,dispatch])
+      }, [message, timeError,dispatch])
       
 const timelineHandle=(e)=>{
 setTimeline({...timeline, [e.target.name]:e.target.value})

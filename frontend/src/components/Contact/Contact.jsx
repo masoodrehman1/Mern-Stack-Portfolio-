@@ -2,18 +2,17 @@ import React, { useState,useEffect } from 'react'
 import "./Contact.css"
 import  {Button, Typography} from "@mui/material"
 import { useDispatch, useSelector } from 'react-redux'
-import { useAlert } from 'react-alert'
 import { contactUs } from '../../actions/user'
+import { success,error  } from 'react-toastify-redux'
 
 
 const Contect = () => {
   const dispatch=useDispatch()
-  const alert=useAlert()
   const [contactData, setContactData ]= useState({name:"",email:"",message:""})
    const handleInputChange=(e)=>{
    setContactData({ ...contactData, [e.target.name]:e.target.value}
 )   }
- const {loading,message,error}=useSelector((state)=>state.update)
+ const {loading,message,error:contactError}=useSelector((state)=>state.update)
   const contactFormHandler=(e)=>{
    e.preventDefault()
    dispatch(contactUs(contactData.name,contactData.email,contactData.message))
@@ -21,16 +20,16 @@ const Contect = () => {
 
   useEffect(() => {
     if(error){
-      alert.error(error)
+      dispatch(error(contactError))
       dispatch({type:"CLEAR_ERRORS"})
     }
     if(message){
-        alert.success(message)
+      dispatch(success(message))
         dispatch({type:"CLEAR_MESSAGE"})
       }
 
   
-  }, [alert, message, error,dispatch])
+  }, [ message, contactError,dispatch])
   
 
   return (
