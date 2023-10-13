@@ -7,7 +7,7 @@ import {FaYoutube} from "react-icons/fa"
 import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import {logout, updateUser} from "../../actions/user"
-import { success, error} from 'react-toastify-redux'
+import { toast} from 'react-toastify';
 import {updateAdminData  } from "../../Reducers/stateData"
 
 
@@ -16,7 +16,7 @@ const AdminPanel = () => {
     const dispatch=useDispatch()
     
     const { message:loginMessage}=useSelector((state)=>state.login)
-    const {message,error:updateError,loading}= useSelector((state)=>state.update)
+    const {message,error,loading}= useSelector((state)=>state.update)
     const adminData = useSelector((state) => state.adminData);
 
  const submitHandler=(e)=>{
@@ -54,19 +54,19 @@ const handleAbout=(e)=>{
 }
 useEffect(() => {
     if(error){
-        dispatch(error(updateError))
+        toast.error(error)
       dispatch({type:"CLEAR_ERRORS"})
     }
     if(message){
-        dispatch(success(message))
+        toast.success(message)
         dispatch({type:"CLEAR_MESSAGE"})
       }
     if(loginMessage){
-        success(loginMessage)
+        toast.success(loginMessage)
       dispatch({type:"CLEAR_MESSAGE"})
     }
   
-  }, [ message, updateError, loginMessage,dispatch])
+  }, [ message, error, loginMessage,dispatch])
   
   
   return (

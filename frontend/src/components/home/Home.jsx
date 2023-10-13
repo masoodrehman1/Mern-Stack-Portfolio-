@@ -97,16 +97,18 @@ backgroundCamera.position.set(2, 2, 12);
     backgroundCamera.rotation.z = window.scrollY * 0.003;
     backgroundCamera.rotation.y = window.scrollY * 0.003;
 
-    const skillsBox=document.getElementById("homeSkillsBox")
-    if (window.scrollY > 1000) {
-      skillsBox.style.animation = "skillCubeBoxAnimationOn 1s linear forwards";
-    } else {
-      skillsBox.style.animation = "skillCubeBoxAnimationOff 1s linear forwards";
+    const skillsBox = document.getElementById("homeSkillsBox");
+    if (skillsBox) {
+     
+      if (window.scrollY > 1000) {
+        skillsBox.style.animation = "skillCubeBoxAnimationOn 1s linear forwards";
+      } else {
+        skillsBox.style.animation = "skillCubeBoxAnimationOff 1s linear forwards";
+      }
     }
    })
     
-    }
-  , [])
+    })
   
 
   return (

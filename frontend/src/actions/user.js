@@ -1,5 +1,4 @@
 import axios from "axios"
-import { toast} from 'react-toastify';
 
 export const getUser= ()=>async (dispatch)=>{
  try{
@@ -39,14 +38,14 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"LOGIN_SUCCESS",
            payload:data.message
        })
-      toast.success("Logged in successfully")
+      
    
     }catch(error){
        dispatch({
            type:"LOGIN_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+       
    
     }
    }
@@ -61,14 +60,14 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"LOGOUT_SUCCESS",
            payload:data.message
        })
-       toast.success("Logout successfully")
+      
    
     }catch(error){
        dispatch({
            type:"LOGOUT_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+       
     }
    }
    export const loadUser= ()=>async (dispatch)=>{
@@ -82,14 +81,14 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"LOAD_USER_SUCCESS",
            payload:data.user
        })
-       toast.success("user got successfully")
+      
    
     }catch(error){
        dispatch({
            type:"LOAD_USER_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+      
     }
    }
    export const updateUser= (name,email, password,skills,about)=>async (dispatch)=>{
@@ -109,7 +108,7 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"UPDATE_USER_SUCCESS",
            payload:data.message
        })
-       toast.success("user updated in successfully")
+      
        
    
     }catch(error){
@@ -117,11 +116,12 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"UPDATE_USER_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+      
    
     }
    }
    export const addTimeline= (title, description,date)=>async (dispatch)=>{
+    console.log("Adding timeline...");
     try{
        dispatch({
            type:"ADD_TIMELINE_REQUEST"
@@ -133,18 +133,19 @@ export const login= (email, password)=>async (dispatch)=>{
        { headers:{
             "Content-Type":"application/json"   
         }})
-        console.log(data)
+        
         dispatch({
            type:"ADD_TIMELINE_SUCCESS",
            payload:data.message
        })
+    
    
     }catch(error){
        dispatch({
            type:"ADD_TIMELINE_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+    
     }
    }
    export const deleteTimeline= (id)=>async (dispatch)=>{
@@ -158,13 +159,14 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"DELETE_TIMELINE_SUCCESS",
            payload:data.message
        })
+     
    
     }catch(error){
        dispatch({
            type:"DELETE_TIMELINE_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+       
     }
    }
    export const addProject= (url,title,image, description,techStack)=>async (dispatch)=>{
@@ -186,13 +188,14 @@ export const login= (email, password)=>async (dispatch)=>{
            payload:data.message
            
        })
+     
    
     }catch(error){
        dispatch({
            type:"ADD_PROJECT_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+      
     }
    }
    export const deleteProject= (id)=>async (dispatch)=>{
@@ -206,13 +209,14 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"DELETE_PROJECT_SUCCESS",
            payload:data.message
        })
+      
    
     }catch(error){
        dispatch({
            type:"DELETE_PROJECT_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+      
     }
    }
    export const contactUs= (name,email,message)=>async (dispatch)=>{
@@ -240,6 +244,6 @@ export const login= (email, password)=>async (dispatch)=>{
            type:"CONTACT_US_FAILURE",
            payload:error.response.data.message
        })
-       toast.error(error.response.data.message)
+       
     }
    }
