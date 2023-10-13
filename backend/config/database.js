@@ -9,5 +9,6 @@ const connectDatabase =async()=>{
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
+
 console.log("connected to database")}catch(error){console.error("error connecting to database:",error)};}
 export {connectDatabase}
