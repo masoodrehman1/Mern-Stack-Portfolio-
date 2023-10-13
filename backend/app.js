@@ -1,7 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 export const app = express();
-// import path from "path"; 
 
 
 
