@@ -3,7 +3,9 @@ import { app } from "./app.js";
 import dotenv from 'dotenv';
 import cloudinary from "cloudinary"
 import {connectDatabase} from "./config/database.js"
-
+import cors from "cors"
+  
+app.use(cors({ origin:  'https://mern-stack-portfolio-sdar.vercel.app' ,methods:["POST","GET","PUT","DELETE"],credentials:true}));
 dotenv.config({ path: "./config/config.env" });
 connectDatabase()
 cloudinary.v2.config({
