@@ -1,11 +1,12 @@
 import axios from "axios"
+ import API_Url from "./apiurl"
 
 export const getUser= ()=>async (dispatch)=>{
  try{
     dispatch({
         type:"GET_USER_REQUEST"
     })
-     const  {data} =await axios.get("/api/v1/user")
+     const  {data} =await axios.get(`${API_Url}/api/v1/user`)
      
      dispatch({
         type:"GET_USER_SUCCESS",
@@ -26,7 +27,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"LOGIN_REQUEST"
        })
-        const  {data} =await axios.post("/api/v1/login", {
+        const  {data} =await axios.post(`${API_Url}/api/v1/login`, {
             email,password
         },
         
@@ -54,7 +55,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"LOGOUT_REQUEST"
        })
-        const  {data} =await axios.get("/api/v1/logout")
+        const  {data} =await axios.get(`${API_Url}/api/v1/logout`)
         
         dispatch({
            type:"LOGOUT_SUCCESS",
@@ -75,7 +76,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"LOAD_USER_REQUEST"
        })
-        const  {data} =await axios.get("/api/v1/me")
+        const  {data} =await axios.get(`${API_Url}/api/v1/me`)
         
         dispatch({
            type:"LOAD_USER_SUCCESS",
@@ -96,7 +97,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"UPDATE_USER_REQUEST"
        })
-        const  {data} =await axios.put("/api/v1/admin/update", {
+        const  {data} =await axios.put(`${API_Url}/api/v1/admin/update`, {
             name,email, password,skills,about
         },
         
@@ -126,7 +127,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"ADD_TIMELINE_REQUEST"
        })
-        const  {data} =await axios.post("/api/v1/admin/timeline/add", {
+        const  {data} =await axios.post(`${API_Url}/api/v1/admin/timeline/add`, {
             title, description,date
         },
         
@@ -153,7 +154,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"DELETE_TIMELINE_REQUEST"
        })
-        const  {data} =await axios.delete(`/api/v1/admin/timeline/${id}`)
+        const  {data} =await axios.delete(`${API_Url}/api/v1/admin/timeline/${id}`)
         console.log(data)
         dispatch({
            type:"DELETE_TIMELINE_SUCCESS",
@@ -175,7 +176,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"ADD_PROJECT_REQUEST"
        })
-        const  {data} =await axios.post("/api/v1/admin/project/add", {
+        const  {data} =await axios.post(`${API_Url}/api/v1/admin/project/add`, {
             url,title,image, description,techStack
         },
         
@@ -203,7 +204,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"DELETE_PROJECT_REQUEST"
        })
-        const  {data} =await axios.delete(`/api/v1/admin/project/${id}`)
+        const  {data} =await axios.delete(`${API_Url}/api/v1/admin/project/${id}`)
         console.log(data)
         dispatch({
            type:"DELETE_PROJECT_SUCCESS",
@@ -225,7 +226,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"CONTACT_US_REQUEST"
        })
-        const  {data} =await axios.post("/api/v1/contact", {
+        const  {data} =await axios.post(`${API_Url}/api/v1/contact`, {
             name,email,message
         },
         
