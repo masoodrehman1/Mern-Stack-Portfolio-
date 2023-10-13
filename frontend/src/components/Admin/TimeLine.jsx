@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { success, error } from 'react-toastify-redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTimeline, deleteTimeline, getUser,  } from '../../actions/user'
 import { MdKeyboardBackspace } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { Button, Typography } from '@mui/material'
 import { FaTrash } from 'react-icons/fa'
+import { toast} from 'react-toastify';
 
 const Timeline = () => {
-    const {message,error:timeError,loading}= useSelector((state)=>state.update)
+    const {message,error,loading}= useSelector((state)=>state.update)
     const {user}= useSelector((state)=>state.user)
     const dispatch=useDispatch()
     const [timeline,setTimeline]= useState({title:"",description:"", date:""})
     console.log(timeline)
     const submitHandler=async(e)=>{
         e.preventDefault()
-        await dispatch(addTimeline({title:timeline.title,description:timeline.description,date:timeline.date}))
+        await dispatch(addTimeline(timeline.title,timeline.description,timeline.date))
         dispatch(getUser())
     }
     const deleteHandler=(id)=>{
@@ -24,16 +24,16 @@ const Timeline = () => {
     }
     useEffect(() => {
         if(error){
-            dispatch(error(timeError))
+            toast.error(error)
           dispatch({type:"CLEAR_ERRORS"})
         }
         if(message){
-            dispatch(success(message))
+            toast.success(message)
             dispatch({type:"CLEAR_MESSAGE"})
           }
        
       
-      }, [message, timeError,dispatch])
+      }, [message, error,dispatch])
       
 const timelineHandle=(e)=>{
 setTimeline({...timeline, [e.target.name]:e.target.value})

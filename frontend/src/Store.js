@@ -1,16 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { loginReducer, updateReducer, userReducer } from './Reducers/user';
-import { adminDataReducer } from './Reducers/stateData';
+import rootReducer from './Reducers/rootReducer';
 
 
 const store = configureStore({
-  reducer: {
-    user: userReducer,
-    login: loginReducer,
-    update: updateReducer,
-    adminData: adminDataReducer,
-   
-  },
+  reducer: rootReducer
  
  
 });

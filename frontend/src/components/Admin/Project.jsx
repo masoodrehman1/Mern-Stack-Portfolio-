@@ -4,13 +4,13 @@ import {  addProject, getUser,  } from '../../actions/user'
 import { MdKeyboardBackspace } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { Button, Typography } from '@mui/material'
-import { success,error } from 'react-toastify-redux'
+import { toast} from 'react-toastify';
 // import { FaTrash } from 'react-icons/fa'
 import { ProjectCard } from '../Projects/Projects'
 
 const Project = () => {
   const { message:loginMessage}=useSelector((state)=>state.login)
-    const {message,error:projectError,loading}= useSelector((state)=>state.update)
+    const {message,error,loading}= useSelector((state)=>state.update)
     const {user}= useSelector((state)=>state.user)
     // console.log(user)
     const dispatch=useDispatch()
@@ -25,20 +25,17 @@ const Project = () => {
     }
    
     useEffect(() => {
+       
         if(error){
-          dispatch(error(projectError))
-          dispatch({type:"CLEAR_ERRORS"})
+          toast.error(error)
+        dispatch({type:"CLEAR_ERRORS"})
+      }
+      if(message){
+          toast.success(message)
+          dispatch({type:"CLEAR_MESSAGE"})
         }
-        if(message){
-          dispatch(success(message))
-            dispatch({type:"CLEAR_MESSAGE"})
-          }
-          if(loginMessage){
-            dispatch(success(loginMessage))
-            dispatch({type:"CLEAR_MESSAGE"})
-          }
       
-      }, [message, projectError,dispatch,loginMessage])
+      }, [message, error,dispatch,loginMessage])
       
  
 const projectHandle=(e)=>{
