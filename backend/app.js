@@ -4,7 +4,7 @@ export const app = express();
 // import path from "path"; 
 import cors from "cors"
 const corsOptions = {
-    origin: 'https://mern-stack-portfolio-sdar.vercel.app/',
+    origin: 'https://mern-stack-portfolio-sdar.vercel.app',
   };
   
   app.use(cors(corsOptions));
