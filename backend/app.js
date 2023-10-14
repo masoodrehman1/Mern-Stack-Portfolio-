@@ -18,6 +18,6 @@ app.use(cors())
  
 app.get('/*',(req,res)=>{
  
-  res.sendFile(path.resolve(__dirname, '../frontend','build'))
+  res.sendFile(path.resolve(__dirname, '../frontend','build',"index.html"))
 })
 app.use(express.static(path.resolve(__dirname,'../frontend','build')))
