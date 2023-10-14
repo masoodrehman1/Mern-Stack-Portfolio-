@@ -1,5 +1,6 @@
 {
-  "name": "frontend",
+  "homepage": "https://mern-stack-portfolio-7hns.vercel.app",
+  "name": "mern-stack-portfolio-7hns",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -49,6 +50,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy":"http://localhost:4000"
+  }
 }
