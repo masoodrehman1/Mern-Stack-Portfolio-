@@ -2,19 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "./backend/server.js", "use": "@vercel/node" },
-    { "src": "./frontend", "use": "@vercel/static" }
+    { "src": "./frontend/build/index.html", "use": "@vercel/static" }
   ],
   "routes": [
     {
-      "src": "/api/v1/(.*)",
+      "src": "/api/(.*)",
       "dest": "/backend/server.js"
-    },
-    {
-      "src": "/frontend/build/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=0, must-revalidate"
-      },
-      "continue": true
     },
     {
       "src": "/(.*)",
