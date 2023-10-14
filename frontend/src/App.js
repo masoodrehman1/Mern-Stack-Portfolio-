@@ -31,7 +31,7 @@ function App() {
   
   return (<>
     <ToastContainer autoClose={6000} />
-   <Router>
+   <Router basename='/'>
     
     {loading?(
       <Loader/>
