@@ -10,8 +10,11 @@
       "dest": "/backend/server.js"
     },
     {
-      "handle": "filesystem",
-      "src": "/frontend/build/(.*)"
+      "src": "/frontend/build/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      },
+      "continue": true
     },
     {
       "src": "/(.*)",
