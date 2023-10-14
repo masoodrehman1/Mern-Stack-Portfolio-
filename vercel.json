@@ -10,8 +10,12 @@
       "dest": "/backend/server.js"
     },
     {
+      "handle": "filesystem",
+      "src": "/frontend/build/(.*)"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/frontend/build/index.html"
+      "dest": "/frontend/build"
     }
   ]
 }
