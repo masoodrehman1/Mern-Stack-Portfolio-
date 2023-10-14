@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "cd client && npm install && npm run build"
   },
   "author": "Masood Ur Rehman",
   "license": "ISC",
