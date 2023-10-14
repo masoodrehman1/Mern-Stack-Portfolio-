@@ -1,13 +1,13 @@
 {
-  "name": "portfolio",
+  "name": "mern-stack-portfolio-7hns",
   "version": "1.0.0",
   "description": "This Is MERN Stack Portfolio Created By Masood Ur Rehman",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "build": "cd client && npm install && npm run build"
+    "dev": "node server.js"
+   
   },
   "author": "Masood Ur Rehman",
   "license": "ISC",
