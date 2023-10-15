@@ -23,7 +23,7 @@ const Login = () => {
     const {loading, message, error}=useSelector(state=>state.login)
     useEffect(() => {
       if(error){
-        alert.error(error)
+        toast.error(error)
         dispatch({type:"CLEAR_ERRORS"})
       }
       if(message){
