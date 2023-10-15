@@ -23,6 +23,7 @@ function App() {
   const dispatch= useDispatch()
   const {isauthenticated}=useSelector((state)=>state.login)
   const {loading, user}=useSelector(((state)=>state.user))
+  console.log(user);
 
   useEffect(() => {
    dispatch(getUser())
@@ -31,7 +32,7 @@ function App() {
   
   return (<>
     <ToastContainer autoClose={6000} />
-   <Router basename='/'>
+   <Router >
     
     {loading?(
       <Loader/>
