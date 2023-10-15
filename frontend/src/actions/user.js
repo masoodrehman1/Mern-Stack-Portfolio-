@@ -1,13 +1,12 @@
-
-
 import axios from "axios"
+const apiEndpoint = process.env.REACT_APP_API_URL;
 
 export const getUser= ()=>async (dispatch)=>{
  try{
     dispatch({
         type:"GET_USER_REQUEST"
     })
-     const  {data} =await axios.get("https://mern-stack-portfolio-iota.vercel.app/api/v1/user")
+     const  {data} =await axios.get(`${apiEndpoint}/api/v1/user`)
      
      dispatch({
         type:"GET_USER_SUCCESS",
@@ -28,7 +27,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"LOGIN_REQUEST"
        })
-        const  {data} =await axios.post("https://mern-stack-portfolio-iota.vercel.app/api/v1/login", {
+        const  {data} =await axios.post(`${apiEndpoint}/api/v1/login`, {
             email,password
         },
         
@@ -56,7 +55,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"LOGOUT_REQUEST"
        })
-        const  {data} =await axios.get("https://mern-stack-portfolio-iota.vercel.app/api/v1/logout")
+        const  {data} =await axios.get(`${apiEndpoint}/api/v1/logout`)
         
         dispatch({
            type:"LOGOUT_SUCCESS",
@@ -77,7 +76,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"LOAD_USER_REQUEST"
        })
-        const  {data} =await axios.get("https://mern-stack-portfolio-iota.vercel.app/api/v1/me")
+        const  {data} =await axios.get(`${apiEndpoint}/api/v1/me`)
         
         dispatch({
            type:"LOAD_USER_SUCCESS",
@@ -98,7 +97,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"UPDATE_USER_REQUEST"
        })
-        const  {data} =await axios.put("https://mern-stack-portfolio-iota.vercel.app/api/v1/admin/update", {
+        const  {data} =await axios.put(`${apiEndpoint}/api/v1/admin/update`, {
             name,email, password,skills,about
         },
         
@@ -127,7 +126,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"ADD_TIMELINE_REQUEST"
        })
-        const  {data} =await axios.post("https://mern-stack-portfolio-iota.vercel.app/api/v1/admin/timeline/add", {
+        const  {data} =await axios.post(`${apiEndpoint}/api/v1/admin/timeline/add`, {
             title, description,date
         },
         
@@ -154,7 +153,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"DELETE_TIMELINE_REQUEST"
        })
-        const  {data} =await axios.delete(`https://mern-stack-portfolio-iota.vercel.app/api/v1/admin/timeline/${id}`)
+        const  {data} =await axios.delete(`${apiEndpoint}/api/v1/admin/timeline/${id}`)
         console.log(data)
         dispatch({
            type:"DELETE_TIMELINE_SUCCESS",
@@ -176,7 +175,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"ADD_PROJECT_REQUEST"
        })
-        const  {data} =await axios.post("https://mern-stack-portfolio-iota.vercel.app/api/v1/admin/project/add", {
+        const  {data} =await axios.post(`${apiEndpoint}/api/v1/admin/project/add`, {
             url,title,image, description,techStack
         },
         
@@ -204,7 +203,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"DELETE_PROJECT_REQUEST"
        })
-        const  {data} =await axios.delete(`https://mern-stack-portfolio-iota.vercel.app/api/v1/admin/project/${id}`)
+        const  {data} =await axios.delete(`${apiEndpoint}/api/v1/admin/project/${id}`)
         console.log(data)
         dispatch({
            type:"DELETE_PROJECT_SUCCESS",
@@ -226,7 +225,7 @@ export const login= (email, password)=>async (dispatch)=>{
        dispatch({
            type:"CONTACT_US_REQUEST"
        })
-        const  {data} =await axios.post("https://mern-stack-portfolio-iota.vercel.app/api/v1/contact", {
+        const  {data} =await axios.post(`${apiEndpoint}/api/v1/contact`, {
             name,email,message
         },
         
