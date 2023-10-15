@@ -4,7 +4,19 @@ import dotenv from 'dotenv';
 import cloudinary from "cloudinary" 
 import {connectDatabase} from "./config/database.js"
 import cors from "cors"
-app.use(cors())
+const allowedOrigins = ['https://mern-stack-portfolio-frontend.vercel.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 dotenv.config({ path: "./config/config.env" });
 connectDatabase()
@@ -14,7 +26,7 @@ cloudinary.v2.config({
     api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
-app.listen(4000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server is ready at", process.env.PORT);
 });
 
