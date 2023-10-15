@@ -1,5 +1,7 @@
+
+
 import axios from "axios"
-const apiEndpoint = process.env.REACT_APP_API_URL;
+const apiEndpoint = 'https://mern-stack-portfolio-iota.vercel.app';
 
 export const getUser= ()=>async (dispatch)=>{
  try{

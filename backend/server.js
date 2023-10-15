@@ -7,15 +7,13 @@ import cors from "cors"
 const allowedOrigins = ['https://mern-stack-portfolio-frontend.vercel.app'];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+    origin: '*',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 204,
 };
 
+app.use(cors(corsOptions));
+  
 app.use(cors(corsOptions));
 
 dotenv.config({ path: "./config/config.env" });
