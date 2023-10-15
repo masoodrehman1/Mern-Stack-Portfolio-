@@ -106,7 +106,7 @@ backgroundCamera.position.set(2, 2, 12);
         skillsBox.style.animation = "skillCubeBoxAnimationOff 1s linear forwards";
       }
     }
-   })
+   },{ passive: false })
     
     })
   
