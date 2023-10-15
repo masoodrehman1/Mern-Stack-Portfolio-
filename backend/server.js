@@ -7,10 +7,13 @@ import cors from "cors"
 const allowedOrigins = ['https://mern-stack-portfolio-frontend.vercel.app'];
 
 const corsOptions = {
-    origin: '*',
+    origin: ['https://mern-stack-portfolio-frontend.vercel.app', 'http://localhost:3000'],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     optionsSuccessStatus: 204,
 };
+
+app.use(cors(corsOptions));
+
 
 app.use(cors(corsOptions));
   
