@@ -4,6 +4,10 @@ const initialState = {
   loading: true,
   user: null,
   error: null,
+  isauthenticated: false,
+  token: '',
+ 
+
 };
 
 export const userReducer = createReducer(initialState, (builder) => {
@@ -36,7 +40,8 @@ export const loginReducer = createReducer({}, (builder) => {
     .addCase('LOGIN_SUCCESS', (state, action) => {
       state.loading = false;
       state.isauthenticated = true;
-      state.message = action.payload;
+      state.token=action.payload.token
+      state.message = action.payload.message;
     })
     .addCase('LOGIN_FAILURE', (state, action) => {
       state.loading = false;
@@ -64,6 +69,7 @@ export const loginReducer = createReducer({}, (builder) => {
       state.loading = false;
       state.isauthenticated = false;
       state.user = null;
+      state.token = '';
       state.message = action.payload;
     })
     .addCase('LOGOUT_FAILURE', (state, action) => {

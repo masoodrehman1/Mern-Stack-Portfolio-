@@ -5,10 +5,6 @@ import cloudinary from "cloudinary"
 import {connectDatabase} from "./config/database.js"
 
 
-
-
-  
-
 dotenv.config({ path: "./config/config.env" });
 connectDatabase()
 cloudinary.v2.config({

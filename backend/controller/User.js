@@ -21,7 +21,7 @@ export const login= async (req,res)=>{
     }
     const token = generateToken(user._id)
     res.cookie("token",token,{
-        expire:new Date(Date.now()+ 600000),
+        expires:new Date(Date.now()+ 600000),
         httpOnly:true,
         
     }) 
@@ -43,13 +43,14 @@ export const login= async (req,res)=>{
 export const logout= async (req,res)=>{
     try {
     
-    await  res.status(200).cookie("token",null,{
-          expires:new Date(Date.now()),
-          httpOnly:true
-      }).json({
-          success:true,
-          message:"logged Out Successfuly"
-      })
+        res.clearCookie("token", {
+            httpOnly: true,
+        });
+        
+        res.status(200).json({
+            success: true,
+            message: "Logged Out Successfully",
+        });
     } catch (error) {
       return res.status(400).json({
           success:false,
