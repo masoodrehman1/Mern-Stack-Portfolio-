@@ -7,7 +7,7 @@ import cors from "cors"
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
-const allowedOrigins = ['https://mern-stack-portfolio-frontend.vercel.app'];
+const allowedOrigins = ['https://mern-stack-portfolio-frontend.vercel.app',"http://localhost:3000"];
 
 const corsOptions = {
   origin: function (origin, callback) {
